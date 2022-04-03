@@ -5,3 +5,4 @@
 * pyTelegramBotAPI==4.4.0
 * requests==2.27.1
 
+![Image alt](https://github.com/V-Moskalenko/telegram_bot/blob/main/telegram_bot.png)
