@@ -1,3 +1,5 @@
+import io
+
 import pandas
 import requests
 import telebot
@@ -11,6 +13,7 @@ bot = telebot.TeleBot(TOKEN)
 
 vacancy = ''
 area = ''
+obj_name = ''
 
 DATA = {
     "Брязу Наталья": "23.01",
@@ -79,6 +82,8 @@ def askArea(message):
     global area
     area = int(message.text)
     hh_data_get(vacancy, area)
+    my_excel = open(obj_name, "rb")
+    bot.send_document(message.chat.id, my_excel)
 
 def all_bd():
     itog = '\n'
@@ -152,6 +157,7 @@ def what_weather(city):
         return '<ошибка на сервере погоды>'
 
 def hh_data_get(text, area):
+    global obj_name
     headers = {
         'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 OPR/83.0.4254.46'}
     url = 'https://api.hh.ru/vacancies/'
@@ -204,7 +210,7 @@ def hh_data_get(text, area):
         f'{text + str(dtt.day) + str(dtt.month) + str(dtt.year) + "-" + str(dtt.hour) + str(dtt.minute)}.xlsx')  # Создание excel-файла
     DATA.to_excel(writer)  # Запись данных в excel
     writer.save()  # Сохранение данных
-    bot.send_document(document=f'{text + str(dtt.day) + str(dtt.month) + str(dtt.year) + "-" + str(dtt.hour) + str(dtt.minute)}.xlsx')
+    obj_name = f'{text + str(dtt.day) + str(dtt.month) + str(dtt.year) + "-" + str(dtt.hour) + str(dtt.minute)}.xlsx'
     #print('DataFrame записан в Excel')
 
 if __name__ == '__main__':
