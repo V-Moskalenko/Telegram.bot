@@ -75,7 +75,7 @@ def func(message):
 def askVacancy(message):
     global vacancy
     vacancy = message.text
-    bot.send_message(message.chat.id, 'Область поиска, 1 - Москва, 1438 - Краснодарский край:')
+    bot.send_message(message.chat.id, 'Область поиска, 1 - Москва, 1438 - Краснодарский край, 113 - Россия, 3247 - Дзержинск, 1679 - Нижегородская область: ')
     bot.register_next_step_handler(message, askArea)
 
 def askArea(message):
@@ -162,7 +162,7 @@ def hh_data_get(text, area):
         'User-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36 OPR/83.0.4254.46'}
     url = 'https://api.hh.ru/vacancies/'
     #text = input("Название вакансии: ")
-    #area = int(input("Область поиска, 1 - Москва, 1438 - Краснодарский край: "))
+    #area = int(input("Область поиска, 1 - Москва, 1438 - Краснодарский край, 113 - Россия, 3247 - Дзержинск, 1679 - Нижегородская область: "))
 
     def get_data(page=0):  # Функция на проведение GET запроса к API HH.ru, для получения данных
         params = {
